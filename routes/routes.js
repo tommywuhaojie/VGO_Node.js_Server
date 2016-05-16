@@ -21,10 +21,16 @@ module.exports = function(app) {
     });
 
     app.post('/register',function(req,res){
+
+        console.log(req.body);
+
+        var phone_number = req.body.phone_number;
         var email = req.body.email;
         var password = req.body.password;
+        var first_name = req.body.first_name;
+        var last_name = req.body.last_name;
 
-        register.register(email,password,function (found) {
+        register.register(phone_number,email,password, first_name, last_name,function (found) {
             console.log(found);
             res.json(found);
         });
