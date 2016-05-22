@@ -6,13 +6,16 @@ var login = require('config/login');
 module.exports = function(app) {
 
 
-    app.get('/', function(req, res) {
-        
+    app.get('/', function(req, res)
+    {
+        console.log("user_id " + req.session.user_id);
+        console.log("has " + req.session.id + " session");
+        req.session.user_id = "123";
         res.end("Node-Android-Project");
     });
 
-    app.post('/login',function(req,res){
-
+    app.post('/login',function(req, res)
+    {
         var sess = req.session;
         if(sess.user_id){
             console.log("has session!");
@@ -24,15 +27,26 @@ module.exports = function(app) {
         var phone_number = req.body.phone_number;
         var password = req.body.password;
 
-        login.login(sess,phone_number,password,function (found) {
+        login.login(sess,phone_number,password,function (found){
             console.log(found);
             res.json(found);
             console.log(sess.user_id);
         });
     });
 
-    app.post('/register',function(req,res){
+    app.get('/logout', function(req, res)
+    {
+        console.log(req.session.id + " session destroy");
+        req.session.destroy(function(err){
+            res.json({
+                'code' : "1",
+                'msg'  : "Successfully logged out"
+            })
+        });
+    });
 
+    app.post('/register',function(req, res)
+    {
         console.log(req.body);
 
         var phone_number = req.body.phone_number;
@@ -45,9 +59,10 @@ module.exports = function(app) {
             console.log(found);
             res.json(found);
         });
-});
+    });
 
-    app.post('/api/chgpass', function(req, res) {
+    app.post('/api/chgpass', function(req, res)
+    {
         var id = req.body.id;
         var opass = req.body.oldpass;
         var npass = req.body.newpass;
@@ -58,7 +73,8 @@ module.exports = function(app) {
         });
     });
 
-    app.post('/api/resetpass', function(req, res) {
+    app.post('/api/resetpass', function(req, res)
+    {
 
         var email = req.body.email;
 
@@ -68,7 +84,8 @@ module.exports = function(app) {
         });
     });
 
-    app.post('/api/resetpass/chg', function(req, res) {
+    app.post('/api/resetpass/chg', function(req, res)
+    {
         var email = req.body.email;
         var code = req.body.code;
         var npass = req.body.newpass;
