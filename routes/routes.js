@@ -11,7 +11,7 @@ module.exports = function(app) {
         console.log("user_id " + req.session.user_id);
         console.log("has " + req.session.id + " session");
         req.session.user_id = "123";
-        res.end("Node-Android-Project");
+        res.end("Welcome to VGO server 1.0!");
     });
 
     app.post('/login',function(req, res)
