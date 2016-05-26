@@ -7,9 +7,9 @@
       * { margin: 0; padding: 0; box-sizing: border-box; }
       body { font: 36px Helvetica, Arial; }
       form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
-      form input { font: 36px Helvetica, Arial; border: 0; padding: 10px; width: 90%; margin-right: .5%; }
-      form button { width: 9%; min-height: 60px; background: rgb(130, 224, 255); border: none; padding: 10px; }
-      #messages { list-style-type: none; margin: 0; padding: 0; }
+      form input { font: 36px Helvetica, Arial; border: 0; padding: 30px; width: 90%; margin-right: .5%; }
+      form button { width: 9%; min-height: 100px; background: rgb(130, 224, 255); border: none; padding: 10px; margin-right:.5%; }
+      #messages { list-style-type: none; margin-bottom: 10%; padding: 0; }
       #messages li { padding: 5px 10px; }
       #messages li:nth-child(odd) { background: #eee; }
     </style>
@@ -24,8 +24,14 @@
     <script>
       var user_id = Math.floor((Math.random() * 100) + 1);
       var socket = io();
+      //var socket = io.connect('http://127.0.0.1:8080');
+
+       socket.on('connect', function() { 
+        socket.emit('chat message', "User #" + user_id + " has joined the chat!");
+      });
+
       $('form').submit(function(){
-        socket.emit('chat message', "ID " + user_id +": " + $('#m').val());
+        socket.emit('chat message', "User #" + user_id +": " + $('#m').val());
         $('#m').val('');
         return false;
       });
