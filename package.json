@@ -1,5 +1,5 @@
 {
-  "name": "node-android",
+  "name": "vgo_server",
   "version": "0.0.1",
   "main": "app.js",
   "dependencies": {
@@ -7,10 +7,11 @@
     "cookie-parser": "^1.4.2",
     "crypto": "~0.0.3",
     "csprng": "~0.1.1",
-    "express": "~4.0.0",
+    "express": "^4.10.2",
+    "express-session": "latest",
     "gravatar": "~1.0.6",
     "mongoose": "~3.8.8",
     "nodemailer": "~0.6.3",
-    "express-session": "latest"
+    "socket.io": "^1.4.6"
   }
 }
