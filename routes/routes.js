@@ -5,13 +5,16 @@ var login = require('config/login');
 
 module.exports = function(app) {
 
-
     app.get('/', function(req, res)
     {
         console.log("user_id " + req.session.user_id);
         console.log("has " + req.session.id + " session");
         req.session.user_id = "123";
         res.end("Welcome to VGO server 1.0!");
+    });
+
+    app.get('/chat', function(req, res){
+        res.sendFile(__dirname + '/chat.html');
     });
 
     app.post('/login',function(req, res)

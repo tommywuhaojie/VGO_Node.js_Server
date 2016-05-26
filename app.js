@@ -26,6 +26,20 @@ app.use(session({
 // Routes  
 require('./routes/routes.js')(app);  
 
-app.listen(port);
-
+var server = app.listen(port);
 console.log('The App runs on port ' + port);
+
+var io = require('socket.io').listen(server);
+
+io.on('connection', function(socket){
+
+    console.log('a user connected');
+
+    socket.on('chat message', function(msg){
+        io.emit('chat message', msg);
+    });
+
+    socket.on('disconnect', function(){
+        console.log('user disconnected');
+    });
+});
