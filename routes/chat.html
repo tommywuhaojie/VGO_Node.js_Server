@@ -23,7 +23,7 @@
     <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
     <script>
       var user_id = Math.floor((Math.random() * 100) + 1);
-      var socket = io.connect('http://ec2-52-40-59-253.us-west-2.compute.amazonaws.com:3000');
+      var socket = io();
       //var socket = io.connect('http://127.0.0.1:8080');
 
        socket.on('connect', function() { 
