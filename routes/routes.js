@@ -43,7 +43,7 @@ module.exports = function(app) {
      *  
      *  1 -> Successfully logged out
      */
-    app.get('/logout', function(req, res)
+    app.delete('/logout', function(req, res)
     {
         console.log("-> logout called");
         console.log(req.session.id + " session destroy");

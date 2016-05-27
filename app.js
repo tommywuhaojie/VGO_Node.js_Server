@@ -29,17 +29,6 @@ require('./routes/routes.js')(app);
 var server = app.listen(port);
 console.log('The App runs on port ' + port);
 
+// Init Socket.io
 var io = require('socket.io').listen(server);
-
-io.on('connection', function(socket){
-
-    console.log('a user connected');
-
-    socket.on('chat message', function(msg){
-        io.emit('chat message', msg);
-    });
-
-    socket.on('disconnect', function(){
-        console.log('user disconnected');
-    });
-});
+require('./node_modules/config/chatroom.js')(io);  
