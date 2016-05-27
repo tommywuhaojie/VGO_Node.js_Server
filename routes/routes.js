@@ -1,7 +1,6 @@
 var chgpass = require('config/chgpass');
 var register = require('config/register');
 var login = require('config/login');
-//var session = require('express-session');
 
 module.exports = function(app) {
 
@@ -19,6 +18,8 @@ module.exports = function(app) {
 
     app.post('/login',function(req, res)
     {
+        console.log("-> login called");
+
         var sess = req.session;
         if(sess.user_id){
             console.log("has session!");
@@ -37,8 +38,14 @@ module.exports = function(app) {
         });
     });
 
+    /* Path: HOST/logout
+     *  Return: JSON Object that contains 'code' & 'msg'
+     *  
+     *  1 -> Successfully logged out
+     */
     app.get('/logout', function(req, res)
     {
+        console.log("-> logout called");
         console.log(req.session.id + " session destroy");
         req.session.destroy(function(err){
             res.json({
@@ -50,7 +57,7 @@ module.exports = function(app) {
 
     app.post('/register',function(req, res)
     {
-        console.log(req.body);
+        console.log("-> register called");
 
         var phone_number = req.body.phone_number;
         var email = req.body.email;
