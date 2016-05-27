@@ -31,4 +31,15 @@ console.log('The App runs on port ' + port);
 
 // Init Socket.io
 var io = require('socket.io').listen(server);
-require('./node_modules/config/chatroom.js')(io);  
+io.on('connection', function(socket){		
+ 		
+     console.log('a user connected');		
+ 		
+     socket.on('chat message', function(msg){		
+         io.emit('chat message', msg);		
+     });		
+ 		
+     socket.on('disconnect', function(){		
+         console.log('user disconnected');		
+     });		
+ }); 
