@@ -22,11 +22,12 @@ module.exports = function(app) {
 
         var sess = req.session;
         if(sess.user_id){
-            console.log("has session!");
+            console.log("user has session");
         }else{
-            console.log("has NO session");
+            console.log("user has NO session");
         }
-        console.log(sess.user_id);
+        console.log("user_session_id: " + sess.id);
+        console.log("user_id: " + sess.user_id);
         
         var phone_number = req.body.phone_number;
         var password = req.body.password;
