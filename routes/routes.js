@@ -6,9 +6,8 @@ module.exports = function(app) {
 
     app.get('/', function(req, res)
     {
-        console.log("user_id " + req.session.user_id);
-        console.log("has " + req.session.id + " session");
-        req.session.user_id = "123";
+        console.log("-> root called")
+        console.log("** session_id: " + req.session.id);
         res.end("Welcome to VGO server 1.0!");
     });
 
@@ -20,7 +19,7 @@ module.exports = function(app) {
     {
         var sess = req.session;
         console.log("-> login called");
-        console.log("** user_id: " + sess.user_id);
+        console.log("** session_id: " + sess.id);
         
         var phone_number = req.body.phone_number;
         var password = req.body.password;
@@ -28,7 +27,7 @@ module.exports = function(app) {
         login.login(sess,phone_number,password,function (found){
             console.log(found);
             res.json(found);
-            console.log(sess.user_id);
+            console.log("** user_id: " + sess.user_id);
         });
     });
 
@@ -40,8 +39,9 @@ module.exports = function(app) {
     app.delete('/logout', function(req, res)
     {
         console.log("-> logout called");
+        console.log("** session_id: " + req.session.id);
         console.log("** user_id: " + req.session.user_id + " destroyed");
-        
+
         req.session.destroy(function(err){
             res.json({
                 'code' : "1",
