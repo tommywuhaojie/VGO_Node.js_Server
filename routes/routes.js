@@ -18,16 +18,9 @@ module.exports = function(app) {
 
     app.post('/login',function(req, res)
     {
-        console.log("-> login called");
-
         var sess = req.session;
-        if(sess.user_id){
-            console.log("user has session");
-        }else{
-            console.log("user has NO session");
-        }
-        console.log("user_session_id: " + sess.id);
-        console.log("user_id: " + sess.user_id);
+        console.log("-> login called");
+        console.log("** user_id: " + sess.user_id);
         
         var phone_number = req.body.phone_number;
         var password = req.body.password;
@@ -47,7 +40,8 @@ module.exports = function(app) {
     app.delete('/logout', function(req, res)
     {
         console.log("-> logout called");
-        console.log(req.session.id + " session destroy");
+        console.log("** user_id: " + req.session.user_id + " destroyed");
+        
         req.session.destroy(function(err){
             res.json({
                 'code' : "1",
