@@ -25,7 +25,7 @@ module.exports = function(app) {
         var password = req.body.password;
 
         login.login(sess,phone_number,password,function (found){
-            console.log("** json: " + found);
+            console.log("** json: " + found.toString());
             res.json(found);
             console.log("** user_id: " + sess.user_id);
         });

@@ -41,7 +41,7 @@ io.use(sharedsession(session, {
 
 io.on('connection', function(socket){		
  		
-     console.log('a user connected');		
+     console.log('-> a user connected through socket');
  		
      socket.on('chat message', function(msg){
          console.log("-> chat message received");
@@ -52,6 +52,6 @@ io.on('connection', function(socket){
      });		
  		
      socket.on('disconnect', function(){		
-         console.log('user disconnected');		
+         console.log('-> user disconnected from socket');
      });		
  }); 
