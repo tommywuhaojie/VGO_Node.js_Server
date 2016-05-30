@@ -29,13 +29,27 @@ require('./routes/routes.js')(app);
 var server = app.listen(port);
 console.log('The App runs on port ' + port);
 
+
 // Init Socket.io
 var io = require('socket.io').listen(server);
+
+// Use shared session middleware for socket.io
+// setting autoSave:true
+var sharedsession = require("express-socket.io-session");
+
+io.use(sharedsession(session, {
+    autoSave:true
+}));
+
 io.on('connection', function(socket){		
  		
      console.log('a user connected');		
  		
-     socket.on('chat message', function(msg){		
+     socket.on('chat message', function(msg){
+         console.log("-> chat message received");
+         console.log(" ** session_id: " + socket.handshake.session.id);
+         console.log(" ** user_id: " + socket.handshake.session.user_id);
+
          io.emit('chat message', msg);		
      });		
  		
