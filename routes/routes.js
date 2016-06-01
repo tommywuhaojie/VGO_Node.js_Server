@@ -1,6 +1,7 @@
 var chgpass = require('config/chgpass');
 var register = require('config/register');
 var login = require('config/login');
+var logout = require('config/logout');
 
 module.exports = function(app) {
 
@@ -25,28 +26,22 @@ module.exports = function(app) {
         var password = req.body.password;
 
         login.login(sess,phone_number,password,function (found){
-            console.log("** json: " + found.toString());
+            console.log(found);
             res.json(found);
             console.log("** user_id: " + sess.user_id);
         });
     });
-
-    /* Path: HOST/logout
-     *  Return: JSON Object that contains 'code' & 'msg'
-     *  
-     *  1 -> Successfully logged out
-     */
+    
     app.delete('/logout', function(req, res)
     {
+        var sess = req.session;
         console.log("-> logout called");
-        console.log("** session_id: " + req.session.id);
-        console.log("** user_id: " + req.session.user_id + " destroyed");
-
-        req.session.destroy(function(err){
-            res.json({
-                'code' : "1",
-                'msg'  : "Successfully logged out"
-            })
+        console.log("** session_id: " + sess.id);
+        console.log("** user_id: " + sess.user_id + " destroyed");
+        
+        logout.logout(sess, function(found) {
+            console.log(found);
+            res.json(found);
         });
     });
 
