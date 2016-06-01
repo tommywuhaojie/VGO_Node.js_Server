@@ -29,29 +29,12 @@ app.use(session);
 require('./routes/routes.js')(app);  
 
 var server = app.listen(port);
-console.log('The App runs on port ' + port);
+console.log('Server runs on port ' + port);
 
-// init Socket.io
+// init Socket.io and enable socket.io session support
 var io = require('socket.io').listen(server);
-
-// enable socket.io session support
 io.use(sharedsession(session, {
     autoSave:true
 }));
 
-io.on('connection', function(socket){		
- 		
-     console.log('-> a user connected through socket');
- 		
-     socket.on('chat message', function(msg){
-         console.log("-> chat message received");
-         console.log(" ** session_id: " + socket.handshake.session.id);
-         console.log(" ** user_id: " + socket.handshake.session.user_id);
-
-         io.emit('chat message', msg);		
-     });		
- 		
-     socket.on('disconnect', function(){		
-         console.log('-> user disconnected from socket');
-     });		
- }); 
+require('./node_modules/config/socketEventHandler.js')(io);

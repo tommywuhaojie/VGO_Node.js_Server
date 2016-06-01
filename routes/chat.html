@@ -27,11 +27,11 @@
       //var socket = io.connect('http://127.0.0.1:8080');
 
        socket.on('connect', function() { 
-        socket.emit('chat message', "User #" + user_id + " has joined the chat!");
+        socket.emit('chat message', "BrowserClient #" + user_id + " has joined the chat!");
       });
 
       $('form').submit(function(){
-        socket.emit('chat message', "User #" + user_id +": " + $('#m').val());
+        socket.emit('chat message', "BrowserClient #" + user_id +": " + $('#m').val());
         $('#m').val('');
         return false;
       });
