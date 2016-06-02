@@ -15,6 +15,11 @@ module.exports = function(app) {
     app.get('/chat', function(req, res){
         res.sendFile(__dirname + '/chat.html');
     });
+    
+    app.get('/currentOnlineUsers', function (req, res) {
+        console.log("-> onlineUsers called: " + onlineUsersList.length);
+        res.json({current_online_users:onlineUsersList.length});
+    });
 
     app.post('/login',function(req, res)
     {
