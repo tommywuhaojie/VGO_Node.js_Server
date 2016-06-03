@@ -76,7 +76,6 @@ module.exports = function(app) {
         var number_of_message = req.body.number_of_message;
 
         chatHistory.chatHistory(sess, other_user_id, number_of_message,function (found) {
-            //res.end(JSON.stringify(found));
             res.json(found);
         });
     });
