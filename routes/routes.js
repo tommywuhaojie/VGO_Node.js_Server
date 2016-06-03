@@ -2,6 +2,7 @@ var chgpass = require('config/chgpass');
 var register = require('config/register');
 var login = require('config/login');
 var logout = require('config/logout');
+var chatHistory = require('config/chatHistory');
 
 module.exports = function(app) {
 
@@ -16,7 +17,7 @@ module.exports = function(app) {
         res.sendFile(__dirname + '/chat.html');
     });
     
-    app.get('/currentOnlineUsers', function (req, res) {
+    app.get('/online_users', function (req, res) {
         console.log("-> onlineUsers called: " + onlineUsersList.length);
         res.json({current_online_users:onlineUsersList.length});
     });
@@ -66,6 +67,21 @@ module.exports = function(app) {
         });
     });
 
+    app.post('/chat_history',function(req, res)
+    {
+        console.log("-> get chat history called");
+
+        var sess = req.session;
+        var other_user_id = req.body.other_user_id;
+        var number_of_message = req.body.number_of_message;
+
+        chatHistory.chatHistory(sess, other_user_id, number_of_message,function (found) {
+            //res.end(JSON.stringify(found));
+            res.json(found);
+        });
+    });
+
+    /* bellow end points are currently not in used */
     app.post('/api/chgpass', function(req, res)
     {
         var id = req.body.id;
