@@ -2,9 +2,53 @@
 
 Dedicated VGO Server using Node.js and MongoDB to achieve real-time back-end application and database on the cloud 
 
-Host URL -> http://ec2-52-40-59-253.us-west-2.compute.amazonaws.com:8080
+HOST_URL -> http://ec2-52-40-59-253.us-west-2.compute.amazonaws.com:8080
+CHAT_ROOM_URL(for testing only, you can browse this via your browser) -> http://ec2-52-40-59-253.us-west-2.compute.amazonaws.com:8080/chat
+CHECK_ONLINE_USERS_URL-> http://ec2-52-40-59-253.us-west-2.compute.amazonaws.com:8080/online_users
 
-Some Instructions:
+Socket.io Client Side Documentation (For all Android and iOS App clients):
+** Note that the code bellow may be varied between Android/iOS and different socket.io libraries, please use them as a reference only
+
+socket is your socket.io object
+
+*** Connect/Disconnect ***
+
+** Note that before you can communicate with server via socket you must first login using http://HOST_URL/login and then connect, otherwise you won't be authenticated to make any valid communication with VGO server. 
+
+** Initialize connection with VGO server:
+-> socket.connect("HOST_URL");
+
+** Disconnect from VGO server:
+-> socket.disconnect();
+
+*** Instance Chat Message ***
+
+* To Send a private message to specific online client (every sent/received private message will be saved in server's database):
+-> socket.emit("private message", jsonObj);
+jsonObj Format:
+{
+ "receiver_user_id" : "user_id of the person who will be receiving the message",
+ "message" : "the private message you want to send"
+}
+
+* To send a public message to the chat room (chat room is only for testing)
+-> socket.emit("chat message", message);
+message Format: no format, namely you can just send a string
+
+* To receive a private message from a specific online client:
+-> socket.on("private message", jsonObj)
+jsonObj Format:
+{
+ "sender_user_id": "user_id of the person who sent the message",
+ "message": "the private message you received"
+}
+
+* To receive a public message in the chat room(testing only)
+-> socket.on("chat message", message)
+message Format: just a regular string
+
+
+Some Server & Database Instructions:
 
 *** How to connect to our server linux machine through PuTTY ***:
 
