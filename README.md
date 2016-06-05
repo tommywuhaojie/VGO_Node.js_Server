@@ -23,34 +23,34 @@ socket is your socket.io object
 
 *** Instance Chat Message ***
 
-* To Send a private message to specific online client (every sent/received private message will be saved in server's database):
--> socket.emit("private message", jsonObj);
-jsonObj Format:
-{
- "receiver_user_id" : "user_id of the person who will be receiving the message",
- "message" : "the private message you want to send"
-}
+* To Send a private message to specific online client (every sent/received private message will be saved in server's database):  
+-> socket.emit("private message", jsonObj);  
+jsonObj Format:  
+{  
+ "receiver_user_id" : "user_id of the person who will be receiving the message",  
+ "message" : "the private message you want to send"  
+}  
 
-* To send a public message to the chat room (chat room is only for testing)
+* To send a public message to the chat room (chat room is only for testing)  
 -> socket.emit("chat message", message);
 message Format: no format, namely you can just send a string
 
-* To receive a private message from a specific online client:
--> socket.on("private message", jsonObj)
-jsonObj Format:
-{
- "sender_user_id": "user_id of the person who sent the message",
- "message": "the private message you received"
-}
+* To receive a private message from a specific online client:  
+-> socket.on("private message", jsonObj)  
+jsonObj Format:  
+{  
+ "sender_user_id": "user_id of the person who sent the message",  
+ "message": "the private message you received"  
+}  
 
-* To receive a public message in the chat room(testing only)
+* To receive a public message in the chat room(testing only)  
 -> socket.on("chat message", message)
 message Format: just a regular string
 
-.
-.
-.
-(more socket methods are comming, stay tuned...)
+.  
+.  
+.  
+(more socket methods are comming, stay tuned...)  
 
 
 Some Server & Database Instructions:
