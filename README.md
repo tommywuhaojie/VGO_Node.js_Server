@@ -15,10 +15,10 @@ socket is your socket.io object
 
 ** Note that before you can communicate with server via socket you must first login using http://HOST_URL/login and then connect, otherwise you won't be authenticated to make any valid communication with VGO server. 
 
-** Initialize connection with VGO server:
+* Initialize connection with VGO server:
 -> socket.connect("HOST_URL");
 
-** Disconnect from VGO server:
+* Disconnect from VGO server:
 -> socket.disconnect();
 
 *** Instance Chat Message ***
@@ -46,6 +46,11 @@ jsonObj Format:
 * To receive a public message in the chat room(testing only)
 -> socket.on("chat message", message)
 message Format: just a regular string
+
+.
+.
+.
+(more socket methods are comming, stay tuned...)
 
 
 Some Server & Database Instructions:
