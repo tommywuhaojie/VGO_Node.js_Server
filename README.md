@@ -45,11 +45,8 @@ jsonObj Format:
 
 * To receive a public message in the chat room(testing only)  
 -> socket.on("chat message", message)
-message Format: just a regular string
+message Format: just a regular string  
 
-.  
-.  
-.  
 (more socket methods are comming, stay tuned...)  
 
 
