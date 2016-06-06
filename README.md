@@ -8,8 +8,8 @@ Dedicated VGO Server using Node.js and MongoDB to achieve real-time backend and 
 
 **Socket.io Client Side Documentation (For all Android and iOS App clients):**  
 ** Note that the code bellow may be varied between Android/iOS and different socket.io libraries, please use them as a reference only
-
 **socket** is your socket.io object
+
 
 *** Connect/Disconnect ***
 
@@ -20,6 +20,7 @@ Dedicated VGO Server using Node.js and MongoDB to achieve real-time backend and 
 
 * Disconnect from VGO server:
 **socket.disconnect();**
+
 
 *** Instance Chat Message ***
 
@@ -42,7 +43,9 @@ jsonObj Format:
 **socket.on("chat message", "message");**  
 "message" Format: just a regular string  
 
+
 (more socket methods are comming, stay tuned...)  
+
 
 
 **Some Server & Database Instructions:**
