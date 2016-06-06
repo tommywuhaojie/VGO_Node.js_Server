@@ -7,7 +7,7 @@ Dedicated VGO Server using Node.js and MongoDB to achieve real-time backend and 
 * CHECK_ONLINE_USERS_URL: http://ec2-52-40-59-253.us-west-2.compute.amazonaws.com:8080/online_users
 
 **Socket.io Client Side Documentation (For all Android and iOS App clients):**  
-** Note that the code bellow may be varied between Android/iOS and different socket.io libraries, please use them as a reference only
+** Note that the code bellow may be varied between Android/iOS and different socket.io libraries, please use them as a reference only.  
 **socket** is your socket.io object
 
 
