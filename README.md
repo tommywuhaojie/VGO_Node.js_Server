@@ -1,7 +1,6 @@
-# VGO_Node.js_Server
-
 ##Dedicated VGO Server using Node.js and MongoDB to achieve real-time backend and database on the cloud 
 
+##Some useful URLs:  
 * HOST_URL: http://ec2-52-40-59-253.us-west-2.compute.amazonaws.com:8080
 * CHAT_ROOM_URL(for testing only, you can browse this via your browser): http://ec2-52-40-59-253.us-west-2.compute.amazonaws.com:8080/chat
 * CHECK_ONLINE_USERS_URL: http://ec2-52-40-59-253.us-west-2.compute.amazonaws.com:8080/online_users
