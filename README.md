@@ -11,7 +11,7 @@
 **socket** is your socket.io object
 
 
-*** Connect/Disconnect ***
+###Connect/Disconnect
 
 ** Note that before you can communicate with server via socket you must first login using http://HOST_URL/login and then connect, otherwise you won't be authenticated to make any valid communication with VGO server. ** 
 
@@ -26,7 +26,7 @@ socket.disconnect();
 ```
 
 
-*** Instance Chat Message ***
+###Instance Chat Message
 
 * To Send a private message to specific online client (every sent/received private message will be saved in server's database):  
 ```
@@ -69,7 +69,7 @@ socket.on("chat message", "message");
 
 ##Some Server & Database Instructions:  
 
-*** How to connect to our server linux machine through PuTTY ***:
+###How to connect to our server linux machine through PuTTY:
 
 1. Download 'putty.exe' from this Google Drive (Windows Version) or from web (if you use Mac)
 2. Download the 'vgo_putty_keypair.ppk' from Google Drive
@@ -81,7 +81,7 @@ socket.on("chat message", "message");
 8. When you see "login as: " in linux terminal, type in "bitnami" and press Enter
 
 
-*** How to deploy Github project ***:
+###How to deploy Github project:
 
 1. Log in to Bitnami linux machine (complete the steps above)
 2. Run $ls
@@ -94,7 +94,7 @@ socket.on("chat message", "message");
 9. Close PuTTY to finish
 
 
-*** How to access our VGO Database (through GUI) ***:
+###How to access our VGO Database (through GUI):
 
 1. Make sure you've downloaded and installed Robomongo, see https://robomongo.org/
 2. Open Robomongo
@@ -108,7 +108,7 @@ socket.on("chat message", "message");
 6. Click on "Connect"
 
 
-*** How to access our VGO Database (through command line) ***:
+###How to access our VGO Database (through command line):
 
 1. Make sure you've downloaded and installed MongoDB on your local machine, see https://www.mongodb.com/
 2. In your local terminal execute command: 
