@@ -16,31 +16,39 @@
 ** Note that before you can communicate with server via socket you must first login using http://HOST_URL/login and then connect, otherwise you won't be authenticated to make any valid communication with VGO server. ** 
 
 * Initialize connection with VGO server:
-**socket.connect("HOST_URL");**
+```socket.connect("HOST_URL");```
 
 * Disconnect from VGO server:
-**socket.disconnect();**
+```socket.disconnect();```
 
 
 *** Instance Chat Message ***
 
-* To Send a private message to specific online client (every sent/received private message will be saved in server's database):  **socket.emit("private message", jsonObj);**  
+* To Send a private message to specific online client (every sent/received private message will be saved in server's database):  ```socket.emit("private message", jsonObj);```  
 jsonObj Format:  
-{"receiver_user_id" : "user_id of the person who will be receiving the message",  
- "message" : "the private message you want to send"}  
+```
+ {
+  "receiver_user_id" : "user_id of the person who will be receiving the message",  
+  "message" : "the private message you want to send"
+ }
+ ```
 
 * To send a public message to the chat room (chat room is only for testing)  
-**socket.emit("chat message", message);**
+```socket.emit("chat message", message);```
 message Format: no format, namely you can just send a string
 
 * To receive a private message from a specific online client:  
-**socket.on("private message", jsonObj);**  
+```socket.on("private message", jsonObj);```  
 jsonObj Format:  
-{"sender_user_id": "user_id of the person who sent the message",  
- "message": "the private message you received"}  
+```
+{
+ "sender_user_id": "user_id of the person who sent the message",  
+ "message": "the private message you received"
+}
+```
 
 * To receive a public message in the chat room(testing only)  
-**socket.on("chat message", "message");**  
+```socket.on("chat message", "message");```  
 "message" Format: just a regular string  
 
 
