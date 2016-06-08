@@ -28,7 +28,7 @@ socket.disconnect();
 
 ###Instance Chat Message
 
-* To Send a private message to specific online client (every sent/received private message will be saved in server's database):  
+* To send a private message to specific online client (every sent/received private message will be saved in server's database):  
 ```
 socket.emit("private message", jsonObj);  
 jsonObj format:  
