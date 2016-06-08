@@ -6,7 +6,7 @@
 * CHAT_ROOM_URL(for testing only, you can browse this via your browser): http://ec2-52-40-59-253.us-west-2.compute.amazonaws.com:8080/chat
 * CHECK_ONLINE_USERS_URL: http://ec2-52-40-59-253.us-west-2.compute.amazonaws.com:8080/online_users
 
-##**Socket.io Client Side Documentation (For all Android and iOS App clients):**  
+##Socket.io Client Side Documentation (For all Android and iOS App clients):  
 ** Note that the code bellow may be varied between Android/iOS and different socket.io libraries, please use them as a reference only.  
   
 **socket** is your socket.io object
@@ -49,7 +49,7 @@ jsonObj Format:
 
 
 
-**Some Server & Database Instructions:**
+##Some Server & Database Instructions:  
 
 *** How to connect to our server linux machine through PuTTY ***:
 
