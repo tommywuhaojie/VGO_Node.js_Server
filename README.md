@@ -26,7 +26,7 @@ socket.disconnect();
 ```
 
 
-###Instance Chat Message
+###Instant Chat Message
 
 * To send a private message to specific online client (every sent/received private message will be saved in server's database):  
 ```
