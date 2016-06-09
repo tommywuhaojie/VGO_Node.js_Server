@@ -114,10 +114,11 @@ socket.on("chat message", "message");
 2. In your local terminal execute command: 
 mongo ec2-52-40-59-253.us-west-2.compute.amazonaws.com:27017/vgoDB -u vgo -p thomas
 
-3. If you see 
+3. If you see
+```
 connecting to: ec2-52-40-59-253.us-west-2.compute.amazonaws.com:27017/vgoDB
->
-, then you are connected successfully
+```
+then you are connected successfully
 
 4. Learn how to manipulate DB through command line you can go to
 http://www.tutorialspoint.com/mongodb/mongodb_create_database.htm
