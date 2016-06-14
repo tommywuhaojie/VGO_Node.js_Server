@@ -99,11 +99,11 @@ socket.on("chat message", "message");
 1. Make sure you've downloaded and installed Robomongo, see https://robomongo.org/
 2. Open Robomongo
 3. Create a connection, Address: ec2-52-40-59-253.us-west-2.compute.amazonaws.com , use Default Port 27017
-4. Click on Authentication tab, check "Perform authentication" and enter following information
-	Database: vgoDB
-       User Name: vgo
-	Password: thomas
-  Auth Mechanism: use default
+4. Click on Authentication tab, check "Perform authentication" and enter following information  
+	Database: vgoDB  
+       User Name: vgo  
+	Password: thomas  
+  Auth Mechanism: use default  
 5. Click on "Save"
 6. Click on "Connect"
 
