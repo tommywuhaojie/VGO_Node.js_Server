@@ -2,7 +2,10 @@ var chgpass = require('config/chgpass');
 var register = require('config/register');
 var login = require('config/login');
 var logout = require('config/logout');
+var uploadAvatar = require('config/uploadAvatar');
 var chatHistory = require('config/chatHistory');
+
+var models = require('config/models'); // temp
 
 module.exports = function(app) {
 
@@ -65,6 +68,28 @@ module.exports = function(app) {
             console.log(found);
             res.json(found);
         });
+    });
+
+    app.post('/upload_avatar', function(req, res){
+        var sess = req.session;
+        uploadAvatar.uploadAvatar(sess, req, function(found){
+           res.json(found); 
+        });
+    });
+
+    app.get('/get_avatar', function(req, res){
+        /* just a test
+        models.User.findOne({phone_number: "7781234567"}, function (err, doc) {
+            if(doc.avatar){
+                res.contentType(doc.avatar_content_type);
+                res.send(doc.avatar);
+            }
+        });
+        */
+        var path = require('path');
+        var appDir = path.dirname(require.main.filename);
+        res.sendFile(path.resolve(appDir + '/avatars/avatar.png'));
+
     });
 
     app.post('/chat_history',function(req, res)
