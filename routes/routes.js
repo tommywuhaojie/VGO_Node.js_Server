@@ -2,7 +2,6 @@ var chgpass = require('config/chgpass');
 var register = require('config/register');
 var login = require('config/login');
 var logout = require('config/logout');
-var uploadAvatar = require('config/uploadAvatar');
 var chatHistory = require('config/chatHistory');
 
 module.exports = function(app) {
@@ -71,7 +70,7 @@ module.exports = function(app) {
     /*
      * Upload Avatar API
      * Upload a avatar for the current logged-in user
-     * 
+     *
      * INPUT: a multipart jpg image
      * Please use size of 256x256 image to
      * minimize server storage usage and upload/download speed
