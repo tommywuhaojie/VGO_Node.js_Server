@@ -5,8 +5,6 @@ var logout = require('config/logout');
 var uploadAvatar = require('config/uploadAvatar');
 var chatHistory = require('config/chatHistory');
 
-var models = require('config/models'); // temp
-
 module.exports = function(app) {
 
     app.get('/', function(req, res)
@@ -30,7 +28,7 @@ module.exports = function(app) {
         var sess = req.session;
         console.log("-> login called");
         console.log("** session_id: " + sess.id);
-        
+
         var phone_number = req.body.phone_number;
         var password = req.body.password;
 
@@ -70,26 +68,83 @@ module.exports = function(app) {
         });
     });
 
-    app.post('/upload_avatar', function(req, res){
-        var sess = req.session;
-        uploadAvatar.uploadAvatar(sess, req, function(found){
-           res.json(found); 
-        });
+    /*
+     * Upload Avatar API
+     * Upload a avatar for the current logged-in user
+     * 
+     * INPUT: a multipart jpg image
+     * Please use size of 256x256 image to
+     * minimize server storage usage and upload/download speed
+     *
+     * OUTPUT: JSON Object contains 'code' & 'msg'
+     * 1 : Avatar uploaded successfully
+     * -1 : Upload failed, please login first
+     *
+     * */
+    var multer  = require('multer')
+    var storage = multer.diskStorage({
+        destination: 'avatars/',
+        filename: function (req, file, cb) {
+            cb(null, req.session.user_id + '.jpg')
+        }
+    });
+    var upload = multer({ storage: storage });
+    app.post('/upload_avatar', upload.single('avatar'), function (req, res, next) {
+        // req.file is the `avatar` file
+        // req.body will hold the text fields, if there were any
+        if(req.session.user_id) {
+            res.json({
+                "code": "1",
+                "msg": "Avatar uploaded successfully"
+            });
+        }else{
+            res.json({
+                "code": "-1",
+                "msg": "Upload failed, please login first"
+            });
+        }
     });
 
+    var fs = require('fs');
+    function fileExists(filePath)
+    {
+        try {return fs.statSync(filePath).isFile();}
+        catch (err) {return false;}
+    }
+
+    /*
+    * Download Avatar API
+    * INPUT: user_id
+    *
+    * OUTPUT: .jpg image file
+    *
+    * If you do not pass any user_id
+    * then server will return the avatar of the current logged-in user
+    *
+    * If the user_id you pass in is not valid/ not exist/ has no session
+    * then server will return a default avatar
+    *
+    * */
     app.get('/get_avatar', function(req, res){
-        /* just a test
-        models.User.findOne({phone_number: "7781234567"}, function (err, doc) {
-            if(doc.avatar){
-                res.contentType(doc.avatar_content_type);
-                res.send(doc.avatar);
-            }
-        });
-        */
+
         var path = require('path');
         var appDir = path.dirname(require.main.filename);
-        res.sendFile(path.resolve(appDir + '/avatars/avatar.png'));
 
+        var user_id;
+        if(req.body.user_id){
+            user_id = req.body.user_id;
+        }else if(req.session.user_id){
+            user_id = req.session.user_id;
+        }else{
+            res.sendFile(path.resolve(appDir + '/avatars/default.jpg'));
+            return;
+        }
+
+        if(fileExists(path.resolve(appDir + '/avatars/' + user_id + '.jpg'))){
+            res.sendFile(path.resolve(appDir + '/avatars/' + user_id + '.jpg'));
+        }else{
+            res.sendFile(path.resolve(appDir + '/avatars/default.jpg'));
+        }
     });
 
     app.post('/chat_history',function(req, res)
