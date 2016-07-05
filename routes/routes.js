@@ -13,6 +13,19 @@ module.exports = function(app) {
         res.end("Welcome to VGO server 1.0!");
     });
 
+    app.post('/sendCode',function(req, res)
+    {
+        console.log("->send verification code called");
+
+        var phone_number = req.body.phone_number;
+        var area_code  = '+1';
+        
+        sendCode.sendCode(phone_number, area_code, function (found) {
+            console.log(found);
+            res.json(found);
+        });
+    });
+
     app.get('/chat', function(req, res){
         res.sendFile(__dirname + '/chat.html');
     });
