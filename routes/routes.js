@@ -82,14 +82,17 @@ module.exports = function(app) {
     app.post('/register',function(req, res)
     {
         console.log("-> register called");
-
-        var phone_number = req.body.phone_number;
+        var objectid = req.body.objectid;
         var email = req.body.email;
         var password = req.body.password;
         var first_name = req.body.first_name;
         var last_name = req.body.last_name;
+        var driver_license = req.body.driver_license;
+        var plate_number = req.body.plate_number;
+        var colour = req.body.colour;
+        var car_model = req.body.car_model;
 
-        register.register(phone_number,email,password, first_name, last_name,function (found) {
+        register.register(objectid, email, password, first_name, last_name, driver_license, plate_number, colour, car_model,function (found) {
             console.log(found);
             res.json(found);
         });
