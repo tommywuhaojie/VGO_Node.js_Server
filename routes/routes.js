@@ -4,6 +4,7 @@ var login = require('config/login');
 var logout = require('config/logout');
 var chatHistory = require('config/chatHistory');
 var sendCode = require('config/sendCode');
+var vertify = require('config/vertify');
 
 module.exports = function(app) {
 
@@ -22,6 +23,19 @@ module.exports = function(app) {
         var area_code  = '+1';
         
         sendCode.sendCode(phone_number, area_code, function (found) {
+            console.log(found);
+            res.json(found);
+        });
+    });
+
+    app.post('/vertify',function(req, res)
+    {
+        console.log("->vertify code is sent");
+
+        var code  = req.body.code;
+        var objectid = req.body.objectid;
+
+        vertify.vertify(code, objectid, function (found) {
             console.log(found);
             res.json(found);
         });
