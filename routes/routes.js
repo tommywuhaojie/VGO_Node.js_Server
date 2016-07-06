@@ -3,6 +3,8 @@ var register = require('config/register');
 var login = require('config/login');
 var logout = require('config/logout');
 var chatHistory = require('config/chatHistory');
+var sendCode = require('config/sendCode');
+var vertify = require('config/vertify');
 
 module.exports = function(app) {
 
@@ -11,6 +13,32 @@ module.exports = function(app) {
         console.log("-> root called")
         console.log("** session_id: " + req.session.id);
         res.end("Welcome to VGO server 1.0!");
+    });
+
+    app.post('/sendCode',function(req, res)
+    {
+        console.log("->send verification code called");
+
+        var phone_number = req.body.phone_number;
+        var area_code  = '+1';
+        
+        sendCode.sendCode(phone_number, area_code, function (found) {
+            console.log(found);
+            res.json(found);
+        });
+    });
+
+    app.post('/vertify',function(req, res)
+    {
+        console.log("->vertify code is sent");
+
+        var code  = req.body.code;
+        var phone_number = req.body.phone_number;
+        console.log('the code sent is '+ code);
+        vertify.vertify(code, phone_number, function (found) {
+            console.log(found);
+            res.json(found);
+        });
     });
 
     app.get('/chat', function(req, res){
