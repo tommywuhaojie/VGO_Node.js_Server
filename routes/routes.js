@@ -1,10 +1,8 @@
 var chgpass = require('config/chgpass');
-var register = require('config/register');
 var login = require('config/login');
 var logout = require('config/logout');
 var chatHistory = require('config/chatHistory');
-var sendCode = require('config/sendCode');
-var vertify = require('config/vertify');
+var account = require('config/account');
 
 module.exports = function(app) {
 
@@ -15,27 +13,46 @@ module.exports = function(app) {
         res.end("Welcome to VGO server 1.0!");
     });
 
-    app.post('/sendCode',function(req, res)
+    app.post('/account/sendCode',function(req, res)
     {
         console.log("->send verification code called");
 
         var phone_number = req.body.phone_number;
         var area_code  = '+1';
         
-        sendCode.sendCode(phone_number, area_code, function (found) {
+        account.sendCode(phone_number, area_code, function (found) {
             console.log(found);
             res.json(found);
         });
     });
 
-    app.post('/vertify',function(req, res)
+    app.post('/account/verify',function(req, res)
     {
-        console.log("->vertify code is sent");
+        console.log("->verify code is sent");
 
         var code  = req.body.code;
         var phone_number = req.body.phone_number;
         console.log('the code sent is '+ code);
-        vertify.vertify(code, phone_number, function (found) {
+        account.verify(code, phone_number, function (found) {
+            console.log(found);
+            res.json(found);
+        });
+    });
+
+    app.post('/account/register',function(req, res)
+    {
+        console.log("-> register called");
+        var objectid = req.body.objectid;
+        var email = req.body.email;
+        var password = req.body.password;
+        var first_name = req.body.first_name;
+        var last_name = req.body.last_name;
+        var driver_license = req.body.driver_license;
+        var plate_number = req.body.plate_number;
+        var colour = req.body.colour;
+        var car_model = req.body.car_model;
+
+        account.register(objectid, email, password, first_name, last_name, driver_license, plate_number, colour, car_model,function (found) {
             console.log(found);
             res.json(found);
         });
@@ -79,24 +96,7 @@ module.exports = function(app) {
         });
     });
 
-    app.post('/register',function(req, res)
-    {
-        console.log("-> register called");
-        var objectid = req.body.objectid;
-        var email = req.body.email;
-        var password = req.body.password;
-        var first_name = req.body.first_name;
-        var last_name = req.body.last_name;
-        var driver_license = req.body.driver_license;
-        var plate_number = req.body.plate_number;
-        var colour = req.body.colour;
-        var car_model = req.body.car_model;
 
-        register.register(objectid, email, password, first_name, last_name, driver_license, plate_number, colour, car_model,function (found) {
-            console.log(found);
-            res.json(found);
-        });
-    });
 
     /*
      * Upload Avatar API
