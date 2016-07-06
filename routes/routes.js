@@ -33,9 +33,9 @@ module.exports = function(app) {
         console.log("->vertify code is sent");
 
         var code  = req.body.code;
-        var objectid = req.body.objectid;
+        var phone_number = req.body.phone_number;
         console.log('the code sent is '+ code);
-        vertify.vertify(code, objectid, function (found) {
+        vertify.vertify(code, phone_number, function (found) {
             console.log(found);
             res.json(found);
         });
