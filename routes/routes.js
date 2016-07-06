@@ -34,7 +34,7 @@ module.exports = function(app) {
 
         var code  = req.body.code;
         var objectid = req.body.objectid;
-
+        console.log('the code enter is '+ code);
         vertify.vertify(code, objectid, function (found) {
             console.log(found);
             res.json(found);
