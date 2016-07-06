@@ -3,6 +3,7 @@ var register = require('config/register');
 var login = require('config/login');
 var logout = require('config/logout');
 var chatHistory = require('config/chatHistory');
+var sendCode = require('config/sendCode');
 
 module.exports = function(app) {
 
