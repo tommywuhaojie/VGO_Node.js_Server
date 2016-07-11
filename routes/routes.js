@@ -59,6 +59,17 @@ module.exports = function(app) {
         });
     });
 
+    app.post('/account/getUserInfo',function(req, res)
+    {
+        console.log("-> get_user_info called");
+        var phone_number = req.body.phone_number;
+        var user_id =  req.body.user_id;
+        
+        account.getUserInfo(phone_number, user_id, function(found){
+           res.json(found); 
+        });
+    });
+
     app.get('/chat', function(req, res){
         res.sendFile(__dirname + '/chat.html');
     });
