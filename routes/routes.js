@@ -1,8 +1,8 @@
 var chgpass = require('config/chgpass');
-var register = require('config/register');
 var login = require('config/login');
 var logout = require('config/logout');
 var chatHistory = require('config/chatHistory');
+var account = require('config/account');
 
 module.exports = function(app) {
 
@@ -11,6 +11,52 @@ module.exports = function(app) {
         console.log("-> root called")
         console.log("** session_id: " + req.session.id);
         res.end("Welcome to VGO server 1.0!");
+    });
+
+    app.post('/account/sendCode',function(req, res)
+    {
+        console.log("->send verification code called");
+
+        var phone_number = req.body.phone_number;
+        var area_code  = '+1';
+        
+        account.sendCode(phone_number, area_code, function (found) {
+            console.log(found);
+            res.json(found);
+        });
+    });
+
+    app.post('/account/verify',function(req, res)
+    {
+        console.log("->verify code is sent");
+
+        var code  = req.body.code;
+        var phone_number = req.body.phone_number;
+        console.log('the code sent is '+ code);
+        account.verify(code, phone_number, function (found) {
+            console.log(found);
+            res.json(found);
+        });
+    });
+
+    app.post('/account/register',function(req, res)
+    {
+        console.log("-> register called");
+        var objectid = req.body.objectid;
+        var email = req.body.email;
+        var password = req.body.password;
+        var first_name = req.body.first_name;
+        var last_name = req.body.last_name;
+        var sex = req.body.sex;
+        var driver_license = req.body.driver_license;
+        var plate_number = req.body.plate_number;
+        var colour = req.body.colour;
+        var car_model = req.body.car_model;
+
+        account.register(objectid, email, password, first_name, last_name, sex, driver_license, plate_number, colour, car_model,function (found) {
+            console.log(found);
+            res.json(found);
+        });
     });
 
     app.get('/chat', function(req, res){
@@ -51,21 +97,7 @@ module.exports = function(app) {
         });
     });
 
-    app.post('/register',function(req, res)
-    {
-        console.log("-> register called");
 
-        var phone_number = req.body.phone_number;
-        var email = req.body.email;
-        var password = req.body.password;
-        var first_name = req.body.first_name;
-        var last_name = req.body.last_name;
-
-        register.register(phone_number,email,password, first_name, last_name,function (found) {
-            console.log(found);
-            res.json(found);
-        });
-    });
 
     /*
      * Upload Avatar API
