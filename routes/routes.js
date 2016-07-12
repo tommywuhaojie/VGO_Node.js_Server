@@ -167,7 +167,7 @@ module.exports = function(app) {
     * then server will return a default avatar
     *
     * */
-    app.get('/get_avatar', function(req, res){
+    app.post('/get_avatar', function(req, res){
 
         var path = require('path');
         var appDir = path.dirname(require.main.filename);
