@@ -64,8 +64,10 @@ module.exports = function(app) {
         console.log("-> get_user_info called");
         var phone_number = req.body.phone_number;
         var user_id =  req.body.user_id;
+        var get_my_info = req.body.get_my_info;
+        var sess = req.session;
         
-        account.getUserInfo(phone_number, user_id, function(found){
+        account.getUserInfo(phone_number, user_id, get_my_info, sess, function(found){
            res.json(found); 
         });
     });
