@@ -93,6 +93,10 @@ socket.on("chat message", "message");
 8. Run $sudo forever start app.js (to keep server app running)
 9. Close PuTTY to finish
 
+Some Tips:
+* If you encounter "Error: listen EADDRINUSE :::8080", try to run '$killall -9 node' to kill the process and try again
+
+
 
 ###How to access our VGO Database (through GUI):
 
