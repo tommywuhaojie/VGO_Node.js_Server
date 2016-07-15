@@ -38,13 +38,6 @@ jsonObj format:
  }
 ```
 
-
-* To send a public message to the chat room (chat room is only for testing)  
-```
-socket.emit("chat message", message);
-message format: regular string
-```
-
 * To receive a private message from a specific online client:  
 ```
 socket.on("private message", jsonObj);
@@ -55,6 +48,11 @@ jsonObj format:
 }
 ```
 
+* To send a public message to the chat room (testing only)  
+```
+socket.emit("chat message", message);
+message format: regular string
+```
 
 * To receive a public message in the chat room(testing only)  
 ```
