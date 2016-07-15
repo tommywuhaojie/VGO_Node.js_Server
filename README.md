@@ -42,8 +42,8 @@ jsonObj format:
 * To send a public message to the chat room (chat room is only for testing)  
 ```
 socket.emit("chat message", message);
+message format: regular string
 ```
-message Format: no format, namely you can just send a string
 
 * To receive a private message from a specific online client:  
 ```
@@ -59,11 +59,11 @@ jsonObj format:
 * To receive a public message in the chat room(testing only)  
 ```
 socket.on("chat message", "message");
-```  
-"message" Format: just a regular string  
+"message" format: regular string  
+```
 
 
-* All the server errors will be sent back to this listener
+* Error Handling: All the server errors will be sent back to this listener
 ```
 socket.on("server error", jsonObj);
 jsonObj format:  
