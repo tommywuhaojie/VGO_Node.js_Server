@@ -63,6 +63,17 @@ socket.on("chat message", "message");
 "message" Format: just a regular string  
 
 
+* All the server errors will be sent back to this listener
+```
+socket.on("server error", jsonObj);
+jsonObj format:  
+{
+ "code": "error code",  
+ "msg": "error description"
+}
+```
+
+
 (more socket methods are comming, stay tuned...)  
 
 
