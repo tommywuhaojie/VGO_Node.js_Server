@@ -157,7 +157,8 @@ module.exports = function(app) {
 
     /*
     * Download Avatar API
-    * INPUT: user_id
+    * 
+    * INPUT: 'user_id' or None if you want to get avatar for current logged-in user
     *
     * OUTPUT: .jpg image file
     *
