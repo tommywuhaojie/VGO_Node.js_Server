@@ -1,5 +1,5 @@
 var chgpass = require('config/chgpass');
-var chatHistory = require('config/chatHistory');
+var chat = require('config/chat');
 var account = require('config/account');
 
 module.exports = function(app) {
@@ -192,6 +192,29 @@ module.exports = function(app) {
         }
     });
 
+    app.post('/add_contact', function(req, res)
+    {
+        console.log("-> add_contact is called \n");
+
+        var sess = req.session;
+        var other_user_id = req.body.other_user_id;
+
+        chat.addContact(sess, other_user_id, function (found) {
+            res.json(found);
+        });
+    });
+    
+    app.post('/get_contact_list', function (req, res) 
+    {
+        console.log("-> get_contact_list is called \n");
+
+        var sess = req.session;
+
+        chat.getContactList(sess, function (found) {
+            res.json(found);
+        });
+    });
+
     app.post('/chat_history',function(req, res)
     {
         console.log("-> get chat history is called \n");
@@ -200,7 +223,7 @@ module.exports = function(app) {
         var other_user_id = req.body.other_user_id;
         var number_of_message = req.body.number_of_message;
 
-        chatHistory.chatHistory(sess, other_user_id, number_of_message,function (found) {
+        chat.chatHistory(sess, other_user_id, number_of_message,function (found) {
             res.json(found);
         });
     });
