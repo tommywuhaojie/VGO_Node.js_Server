@@ -205,7 +205,7 @@ module.exports = function(app) {
         });
     });
     
-    app.post('/get_contact_list', function (req, res) 
+    app.post('/get_contact_list', function (req, res)
     {
         console.log("-> get_contact_list is called \n");
 
