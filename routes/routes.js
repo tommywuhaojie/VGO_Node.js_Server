@@ -8,14 +8,14 @@ module.exports = function(app) {
 
     app.get('/', function(req, res)
     {
-        console.log("-> root called")
+        console.log("-> url root is called \n")
         console.log("** session_id: " + req.session.id);
         res.end("Welcome to VGO server 1.0!");
     });
 
     app.post('/account/sendCode',function(req, res)
     {
-        console.log("->send verification code called");
+        console.log("-> send verification code is called \n");
 
         var phone_number = req.body.phone_number;
         var area_code  = '+1';
@@ -28,7 +28,7 @@ module.exports = function(app) {
 
     app.post('/account/verify',function(req, res)
     {
-        console.log("->verify code is sent");
+        console.log("-> verify code is sent \n");
 
         var code  = req.body.code;
         var phone_number = req.body.phone_number;
@@ -41,7 +41,7 @@ module.exports = function(app) {
 
     app.post('/account/register',function(req, res)
     {
-        console.log("-> register called");
+        console.log("-> register is called \n");
         var objectid = req.body.objectid;
         var email = req.body.email;
         var password = req.body.password;
@@ -61,7 +61,7 @@ module.exports = function(app) {
 
     app.post('/account/getUserInfo',function(req, res)
     {
-        console.log("-> get_user_info called");
+        console.log("-> getUserInfo is called \n");
         var phone_number = req.body.phone_number;
         var user_id =  req.body.user_id;
         var get_my_info = req.body.get_my_info;
@@ -77,14 +77,14 @@ module.exports = function(app) {
     });
     
     app.get('/online_users', function (req, res) {
-        console.log("-> onlineUsers called: " + onlineUsersList.length);
+        console.log("-> getOnlineUsers is called: " + onlineUsersList.length + "\n");
         res.json({current_online_users:onlineUsersList.length});
     });
 
     app.post('/login',function(req, res)
     {
         var sess = req.session;
-        console.log("-> login called");
+        console.log("-> login is called");
         console.log("** session_id: " + sess.id);
 
         var phone_number = req.body.phone_number;
@@ -93,19 +93,18 @@ module.exports = function(app) {
         login.login(sess,phone_number,password,function (found){
             console.log(found);
             res.json(found);
-            console.log("** user_id: " + sess.user_id);
+            console.log("** user_id: " + sess.user_id + "\n");
         });
     });
     
     app.delete('/logout', function(req, res)
     {
         var sess = req.session;
-        console.log("-> logout called");
+        console.log("-> logout is called");
         console.log("** session_id: " + sess.id);
-        console.log("** user_id: " + sess.user_id + " destroyed");
+        console.log("** user_id: " + sess.user_id + " destroyed" + "\n");
         
         logout.logout(sess, function(found) {
-            console.log(found);
             res.json(found);
         });
     });
@@ -137,11 +136,13 @@ module.exports = function(app) {
         // req.file is the `avatar` file
         // req.body will hold the text fields, if there were any
         if(req.session.user_id) {
+            console.log("-> avatar uploaded successfully \n");
             res.json({
                 "code": "1",
                 "msg": "Avatar uploaded successfully"
             });
         }else{
+            console.log("-> avatar upload failed \n");
             res.json({
                 "code": "-1",
                 "msg": "Upload failed, please login first"
@@ -170,6 +171,8 @@ module.exports = function(app) {
     *
     * */
     app.post('/get_avatar', function(req, res){
+        
+        console.log("-> get avatar is called \n");
 
         var path = require('path');
         var appDir = path.dirname(require.main.filename);
@@ -193,7 +196,7 @@ module.exports = function(app) {
 
     app.post('/chat_history',function(req, res)
     {
-        console.log("-> get chat history called");
+        console.log("-> get chat history is called \n");
 
         var sess = req.session;
         var other_user_id = req.body.other_user_id;
