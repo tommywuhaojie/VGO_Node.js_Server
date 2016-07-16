@@ -1,6 +1,4 @@
 var chgpass = require('config/chgpass');
-var login = require('config/login');
-var logout = require('config/logout');
 var chatHistory = require('config/chatHistory');
 var account = require('config/account');
 
@@ -90,7 +88,7 @@ module.exports = function(app) {
         var phone_number = req.body.phone_number;
         var password = req.body.password;
 
-        login.login(sess,phone_number,password,function (found){
+        account.login(sess,phone_number,password,function (found){
             console.log(found);
             res.json(found);
             console.log("** user_id: " + sess.user_id + "\n");
@@ -104,7 +102,7 @@ module.exports = function(app) {
         console.log("** session_id: " + sess.id);
         console.log("** user_id: " + sess.user_id + " destroyed" + "\n");
         
-        logout.logout(sess, function(found) {
+        account.logout(sess, function(found) {
             res.json(found);
         });
     });
