@@ -1,6 +1,7 @@
 var chgpass = require('config/chgpass');
 var chat = require('config/chat');
 var account = require('config/account');
+var trip = require('config/trip')
 
 module.exports = function(app) {
 
@@ -69,6 +70,59 @@ module.exports = function(app) {
            res.json(found); 
         });
     });
+
+    app.post('/trip/create',function(req, res)
+    {
+        console.log("-> create trip is called \n");
+        var sess = req.session;
+        
+        var date_id = req.body.date_id;
+        var start_lat = req.body.start_lat;
+        var start_lng = req.body.start_lng;
+        var start_location = req.body.start_location;
+        var end_lat = req.body.end_lat;
+        var end_lng = req.body.end_lng;
+        var end_location = req.body.end_location;
+        var est_time = req.body.est_time;
+        var est_distance = req.body.est_distance;
+        var reg_as = req.body.reg_as;
+        
+        trip.create(date_id, start_lat, start_lng, start_location, end_lat, end_lng, end_location, est_time, est_distance, reg_as, sess, function(found){
+            res.json(found);
+        });
+    });
+
+    app.get('/trip/getSelf',function (req, res) {
+        console.log("-> getSelf trip is called \n");
+        var sess = req.session;
+
+        var option = req.option;
+        var value = req.value;
+
+        trip.getSelf(option, value, sess, function(found){
+            res.json(found);
+        });
+    });
+
+    app.get('/trip/get',function (req, res) {
+        console.log("-> get trip info is called \n");
+        var sess = req.session;
+
+        trip.get(sess, function(found){
+            res.json(found);
+        });
+    });
+
+    app.get('/trip/match',function (req, res) {
+        console.log("-> match trip is called \n");
+        var sess = req.session;
+
+        trip.match(sess, function(found){
+            res.json(found);
+        });
+    });
+
+
 
     app.get('/chat', function(req, res){
         res.sendFile(__dirname + '/chat.html');
