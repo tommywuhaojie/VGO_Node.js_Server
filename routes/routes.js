@@ -204,6 +204,30 @@ module.exports = function(app) {
             res.json(found);
         });
     });
+
+    app.post('/get_single_contact', function (req, res)
+    {
+        console.log("-> get_single_contact is called \n");
+
+        var sess = req.session;
+        var other_user_id = req.body.other_user_id;
+
+        chat.getSingleContact(sess, other_user_id, function (found) {
+            res.json(found);
+        });
+    });
+
+    app.post('/read_all_message', function (req, res)
+    {
+        console.log("-> read_all_message is called \n");
+
+        var sess = req.session;
+        var other_user_id = req.body.other_user_id;
+
+        chat.readAllMessage(sess, other_user_id, function (found) {
+            res.json(found);
+        });
+    });
     
     app.post('/get_contact_list', function (req, res)
     {
