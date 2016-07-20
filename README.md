@@ -34,7 +34,8 @@ socket.emit("private message", jsonObj);
 jsonObj format:  
  {
   "receiver_user_id" : "user_id of the person who will be receiving the message",  
-  "message" : "the private message you want to send"
+  "message" : "the private message you want to send",
+  "message_id" : "an unique ID of each message you send, recommend to use GUID for this ID" (Optional field) 
  }
 ```
 
@@ -48,18 +49,35 @@ jsonObj format:
 }
 ```
 
-* To send a public message to the chat room (testing only)  
+* To receive a confirmation that your private message is successfully delivered to server
 ```
-socket.emit("chat message", message);
-message format: regular string
-```
-
-* To receive a public message in the chat room(testing only)  
-```
-socket.on("chat message", "message");
-"message" format: regular string  
+socket.on("delivery confirmation", "message_id");
+"message_id" : (String) the unique message ID that you send together with the private message  
 ```
 
+* To notify the other user that you are typing:
+```
+socket.emit("is typing", "user_id");
+"user_id" : (String) the user_id of who you are chatting to
+```
+
+* To notify the other user that you stop typing:
+```
+socket.emit("stop typing", "user_id");
+"user_id" : (String) the user_id of who you are chatting to
+```
+
+* To be notified that the other user is typing:
+```
+socket.on("is typing", "user_id");
+"user_id" : (String) the user_id of who you are chatting to
+```
+
+* To be notified that the other user stops typing:
+```
+socket.on("stop typing", "user_id");
+"user_id" : (String) the user_id of who you are chatting to
+```
 
 * Error Handling: All the server errors will be sent back to this listener
 ```
@@ -69,7 +87,26 @@ jsonObj format:
  "code": "error code",  
  "msg": "error description"
 }
+
+Details:
+-1 -> Failed to authenticate
+-2 -> Required field not set
+-3 -> Invalid receiver_user_id
 ```
+
+### For Testing 
+* To send a public message to the chat room (testing only)  
+```
+socket.emit("chat message", "message");
+message format: regular string
+```
+
+* To receive a public message in the chat room(testing only)  
+```
+socket.on("chat message", "message");
+"message" format: regular string  
+```
+
 
 
 (more socket methods are comming, stay tuned...)  
