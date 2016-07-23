@@ -289,4 +289,32 @@ module.exports = function(app) {
 
         });
     });
+
+    var pokegoScan = require('pokego-scan');
+    app.post('/pokemon', function(req, res)
+    {
+        var lat = req.body.lat;
+        var lng  = req.body.lng;
+
+        if(lat && lng) {
+
+            var coords = {
+                latitude: lat,
+                longitude: lng
+            };
+
+            pokegoScan(coords, function (err, pokemon) {
+                if (err)
+                    return;
+                else
+                    res.json(pokemon);
+            });
+
+            // filter by max distance
+            //pokegoScan(coords, {distance: 4000}, function (err, pokemon) {
+            //    if (err) throw err;
+            //    res.json(pokemon);
+            //});
+        }
+    });
 };
