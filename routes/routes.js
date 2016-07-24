@@ -295,6 +295,7 @@ module.exports = function(app) {
     {
         var lat = req.body.lat;
         var lng  = req.body.lng;
+        var filter = req.body.filter;
 
         if(lat && lng) {
 
@@ -303,12 +304,25 @@ module.exports = function(app) {
                 longitude: lng
             };
 
-            pokegoScan(coords, function (err, pokemon) {
-                if (err)
-                    return;
-                else
-                    res.json(pokemon);
-            });
+            if(filter) {
+                // filter by specific pokemon
+                // pokegoScan(coords, {filter: ["Zubat", "Pidgey"]}, function(err, pokemon) {
+                pokegoScan(coords, {filter: [filter]}, function(err, pokemon) {
+                    if (!err) {
+                        res.json(pokemon);
+                    }else{
+                        res.end("error");
+                    }
+                });
+            }else{
+                pokegoScan(coords, function (err, pokemon) {
+                    if (!err) {
+                        res.json(pokemon);
+                    }else{
+                        res.end("error");
+                    }
+                });
+            }
 
             // filter by max distance
             //pokegoScan(coords, {distance: 4000}, function (err, pokemon) {
