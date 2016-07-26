@@ -292,7 +292,7 @@ module.exports = function(app) {
 
     var pokegoScan = require('pokego-scan');
     async = require("async");
-    app.post('/pokemon', function(req, res)
+    app.post('/pokemon_search', function(req, res)
     {
         var lat = req.body.lat;
         var lng  = req.body.lng;
@@ -326,8 +326,6 @@ module.exports = function(app) {
                             if (!err) {
                                 gotErr = false;
                                 res.json(pokemon);
-                            }else{
-                                console.log(err.message);
                             }
                             next();
                         });
