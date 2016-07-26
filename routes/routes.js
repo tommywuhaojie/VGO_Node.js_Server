@@ -291,6 +291,7 @@ module.exports = function(app) {
     });
 
     var pokegoScan = require('pokego-scan');
+    async = require("async");
     app.post('/pokemon', function(req, res)
     {
         var lat = req.body.lat;
@@ -311,17 +312,29 @@ module.exports = function(app) {
                     if (!err) {
                         res.json(pokemon);
                     }else{
-                        res.end("error");
+                        res.end(err.message);
                     }
                 });
             }else{
-                pokegoScan(coords, function (err, pokemon) {
-                    if (!err) {
-                        res.json(pokemon);
-                    }else{
-                        res.end("error");
-                    }
-                });
+
+                var gotErr = true;
+                async.whilst(function () {
+                        return gotErr;
+                    },
+                    function (next) {
+                        pokegoScan(coords, function (err, pokemon) {
+                            if (!err) {
+                                gotErr = false;
+                                res.json(pokemon);
+                            }else{
+                                console.log(err.message);
+                            }
+                            next();
+                        });
+                    },
+                    function (err) {
+                        console.log("GOT POKEMON");
+                    });
             }
 
             // filter by max distance
